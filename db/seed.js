@@ -43,13 +43,14 @@ async function testDB() {
   try {
     console.log("starting to test database...");
     const users = await getAllUsers();
-    // client.connect();
-    // const { users } = await client.query(`SELECT * FROM users;`);
-    console.log(users);
+    console.log("getAllUsers:", users);
+    console.log("finished database tests!");
   } catch (error) {
-    console.error(error);
-  } finally {
-    client.end();
+    console.error("error testing database!");
+    throw error;
   }
 }
-testDB();
+rebuildDB()
+  .then(testDB)
+  .catch(console.error)
+  .finally(() => client.end());
