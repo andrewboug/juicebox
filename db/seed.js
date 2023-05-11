@@ -21,6 +21,7 @@ async function createTables() {
         password varchar (255) NOT NULL
     );
     `);
+
     console.log("finished building tables!");
   } catch (error) {
     console.error("error building tables!");
@@ -33,9 +34,7 @@ async function rebuildDB() {
     await dropTables();
     await createTables();
   } catch (error) {
-    console.error(error);
-  } finally {
-    client.end();
+    throw error;
   }
 }
 
