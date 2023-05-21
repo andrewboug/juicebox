@@ -42,6 +42,13 @@ apiRouter.use("/users", usersRouter);
 apiRouter.use("/posts", postsRouter);
 apiRouter.use("/tags", tagsRouter);
 
+apiRouter.use((req, res, next) => {
+  if (req.user) {
+    console.log("User is set:", req.user);
+  }
+  next();
+});
+
 apiRouter.use((error, req, res, next) => {
   res.send({
     name: error.name,
