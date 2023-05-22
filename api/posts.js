@@ -1,7 +1,7 @@
 const express = require("express");
 const postsRouter = express.Router();
 const { requireUser } = require("./utils");
-const { getAllPosts } = require("../db");
+const { getAllPosts, updatePost, getPostById } = require("../db");
 
 postsRouter.post("/", requireUser, async (req, res, next) => {
   const { title, content, tags = "" } = req.body;
